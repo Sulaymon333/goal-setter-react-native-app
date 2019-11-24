@@ -12,7 +12,7 @@ const App = props => {
         if (!goalTitle) {
             return;
         }
-        setGoals([{ id: Math.random().toString(), value: goalTitle }, ...goals]);
+        setGoals(currentGoal => [{ id: Math.random().toString(), value: goalTitle }, ...currentGoal]);
         setModalStatus(false);
     };
 
