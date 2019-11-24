@@ -12,8 +12,12 @@ const App = props => {
         if (!goalTitle) {
             return;
         }
-        setGoals(currentGoal => [{ id: Math.random().toString(), value: goalTitle }, ...currentGoal]);
+        setGoals(currentGoals => [{ id: Math.random().toString(), value: goalTitle }, ...currentGoals]);
         setModalStatus(false);
+    };
+
+    const deleteGoal = goalId => {
+        setGoals(currentGoals => currentGoals.filter(goal => goal.id !== goalId));
     };
 
     const openModal = () => {
@@ -27,12 +31,18 @@ const App = props => {
     return (
         <View style={styles.screen}>
             <GoalInput addGoalHandler={addGoalHandler} modalStatus={modalStatus} onCancel={cancelGoalInputHandler} />
-            <Button title="Add a Goal" onPress={openModal} />
+            <View style={styles.addBtnContainer}>
+                <View style={styles.addBtn}>
+                    <Button title="Add a Goal" onPress={openModal} />
+                </View>
+            </View>
             <FlatList
-                keyExtractor={(item, index) => item.id}
                 style={styles.scrollContainer}
+                keyExtractor={(item, index) => item.id}
                 data={goals}
-                renderItem={itemData => <GoalItem goal={itemData.item.value} />}
+                renderItem={itemData => (
+                    <GoalItem id={itemData.item.id} goal={itemData.item.value} onDelete={deleteGoal} />
+                )}
             />
         </View>
     );
@@ -43,6 +53,16 @@ export default App;
 const styles = StyleSheet.create({
     screen: {
         padding: 50
+    },
+    addBtnContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%'
+    },
+    addBtn: {
+        width: '50%',
+        borderRadius: 20,
+        overflow: 'hidden'
     },
     scrollContainer: {
         paddingHorizontal: 10
