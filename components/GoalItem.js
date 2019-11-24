@@ -12,12 +12,6 @@ const GoalItem = ({ goal }) => {
 export default GoalItem;
 
 const styles = StyleSheet.create({
-    scrollContainer: {
-        paddingHorizontal: 10
-    },
-    goalList: {
-        marginVertical: 10
-    },
     goalItem: {
         paddingVertical: 7,
         paddingHorizontal: 10,
