@@ -37,7 +37,7 @@ const App = props => {
                 </View>
             </View>
             <FlatList
-                style={styles.scrollContainer}
+                style={styles.goalList}
                 keyExtractor={(item, index) => item.id}
                 data={goals}
                 renderItem={itemData => (
@@ -64,10 +64,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         overflow: 'hidden'
     },
-    scrollContainer: {
-        paddingHorizontal: 10
-    },
     goalList: {
+        paddingHorizontal: 10,
         marginVertical: 10
     }
 });
